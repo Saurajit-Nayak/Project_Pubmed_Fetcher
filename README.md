@@ -72,10 +72,6 @@ project_pubmed_fetcher/
 4. **Push to GitHub** (`git push origin feature-branch`)
 5. **Open a Pull Request** 🚀
 
-## 🔗 License
-
-This project is licensed under the MIT License .
-
 ## 📬 Contact
 
 For any questions or issues, feel free to reach out at **[saurajitnayak095@gmail.com](mailto\:saurajitnayak095@gmail.com)**.
