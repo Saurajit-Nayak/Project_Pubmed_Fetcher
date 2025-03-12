@@ -4,10 +4,10 @@ import json
 from Bio import Entrez
 from typing import List, Dict
 
-# Force Python to use certifi's certificate
+
 ssl._create_default_https_context = lambda: ssl.create_default_context(cafile=certifi.where())
 
-Entrez.email = "your_email@example.com"  # Replace with your email
+Entrez.email = "saurajitnayak095@gmail.com"  
 
 def fetch_papers(query: str, max_results: int = 10, debug: bool = False) -> List[Dict]:
     """Fetches research papers from PubMed and extracts necessary details."""
@@ -29,23 +29,23 @@ def fetch_papers(query: str, max_results: int = 10, debug: bool = False) -> List
 
             if debug:
                 print(f"\n=== [DEBUG] Raw API response for {paper_id} ===\n")
-                print(json.dumps(details, indent=2))  # Pretty-print JSON
+                print(json.dumps(details, indent=2))  
             
             try:
                 article = details["PubmedArticle"][0]["MedlineCitation"]["Article"]
                 authors_list = article.get("AuthorList", [])
 
-                # Extract title
+                
                 title = article.get("ArticleTitle", "N/A")
 
-                # Extract publication date
+                
                 pub_date = article.get("Journal", {}).get("JournalIssue", {}).get("PubDate", {})
                 year = pub_date.get("Year", "N/A")
                 month = pub_date.get("Month", "")
                 day = pub_date.get("Day", "")
                 publication_date = f"{year}-{month}-{day}".strip("-")
 
-                # Extract authors & affiliations
+               
                 non_academic_authors = []
                 company_affiliations = []
                 corresponding_email = "N/A"
@@ -55,7 +55,7 @@ def fetch_papers(query: str, max_results: int = 10, debug: bool = False) -> List
                     fore_name = author.get("ForeName", "")
                     full_name = f"{fore_name} {last_name}".strip()
 
-                    # Extract affiliation
+                   
                     affiliations = author.get("AffiliationInfo", [])
                     for aff in affiliations:
                         aff_text = aff.get("Affiliation", "")
@@ -64,7 +64,7 @@ def fetch_papers(query: str, max_results: int = 10, debug: bool = False) -> List
                         else:
                             non_academic_authors.append(full_name)
 
-                    # Extract email (if present)
+                   
                     if "@" in aff_text:
                         corresponding_email = aff_text
 
