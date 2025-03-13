@@ -9,7 +9,7 @@ ssl._create_default_https_context = lambda: ssl.create_default_context(cafile=ce
 
 Entrez.email = "saurajitnayak095@gmail.com"  
 
-def fetch_papers(query: str, max_results: int = 10, debug: bool = False) -> List[Dict]:
+def fetch_papers(query: str, max_results: int = 20, debug: bool = False) -> List[Dict]:
     """Fetches research papers from PubMed and extracts necessary details."""
     if debug:
         print(f"[DEBUG] Searching PubMed for: {query}")
