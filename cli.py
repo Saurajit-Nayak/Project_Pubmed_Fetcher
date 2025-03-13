@@ -1,3 +1,4 @@
+
 import argparse
 import csv
 import sys
@@ -12,11 +13,16 @@ def main():
 
     print(f"Fetching papers from PubMed for query: {args.query}...")
 
-   
     sys.stdout.reconfigure(encoding="utf-8")
 
-  
     papers = fetch_papers(args.query, debug=args.debug)
+
+    if not papers:
+        print("No relevant papers found. Try a different query.")
+        return
+
+    if args.debug:
+        print(f"[DEBUG] Fetched {len(papers)} papers from PubMed.")
 
     if args.file:
         with open(args.file, "w", newline="", encoding="utf-8") as f:
@@ -28,7 +34,7 @@ def main():
         print(f"Results saved to {args.file}")
     else:
         for paper in papers:
-            print(paper) 
+            print(paper)
 
 if __name__ == "__main__":
     main()
